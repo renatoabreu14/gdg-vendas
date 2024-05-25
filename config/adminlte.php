@@ -295,7 +295,13 @@ return [
 
     'menu' => [
         // Navbar items:
+        ['header' => 'Cadastros'],
         [
+            'text' => 'Clientes',
+            'route' => 'customers.index',
+            'icon' => 'fas fa-fw fa-user',
+        ],
+        /*[
             'type' => 'navbar-search',
             'text' => 'search',
             'topnav_right' => true,
@@ -386,7 +392,7 @@ return [
             'text' => 'information',
             'icon_color' => 'cyan',
             'url' => '#',
-        ],
+        ],*/
     ],
 
     /*

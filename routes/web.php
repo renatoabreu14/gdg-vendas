@@ -28,3 +28,17 @@ Route::get('/home', function() {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+/*Route::get('/teste/{name?}', [\App\Http\Controllers\TestController::class, 'test']);
+Route::get('/soma/{v1}/{v2}', [\App\Http\Controllers\TestController::class, 'soma']);*/
+
+Route::get('customers', [App\Http\Controllers\CustomerController::class, 'index'])->name('customers.index');
+Route::delete('customers/{customer}', [App\Http\Controllers\CustomerController::class, 'destroy'])->name('customers.destroy');
+Route::get('customers/create', [App\Http\Controllers\CustomerController::class, 'create'])->name('customers.create');
+Route::post('customers', [App\Http\Controllers\CustomerController::class, 'store'])->name('customers.store');
+Route::get('customers/{customer}/edit', [App\Http\Controllers\CustomerController::class, 'edit'])->name('customers.edit');
+Route::put('customers/{customer}', [App\Http\Controllers\CustomerController::class, 'update'])->name('customers.update');
+Route::get('customers/{customer}', [App\Http\Controllers\CustomerController::class, 'show'])->name('customers.show');
+
+Route::resource('addresses', App\Http\Controllers\AddressController::class)->except('create, show, index');
+Route::get('addresses/{customer}/create', [App\Http\Controllers\AddressController::class, 'create'])->name('addresses.create');
