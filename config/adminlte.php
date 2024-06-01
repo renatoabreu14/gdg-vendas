@@ -301,6 +301,12 @@ return [
             'route' => 'customers.index',
             'icon' => 'fas fa-fw fa-user',
         ],
+
+        [
+            'text' => 'Produtos',
+            'route' => 'products.index',
+            'icon' => 'fas fa-fw fa-user',
+        ],
         /*[
             'type' => 'navbar-search',
             'text' => 'search',

@@ -42,3 +42,5 @@ Route::get('customers/{customer}', [App\Http\Controllers\CustomerController::cla
 
 Route::resource('addresses', App\Http\Controllers\AddressController::class)->except('create, show, index');
 Route::get('addresses/{customer}/create', [App\Http\Controllers\AddressController::class, 'create'])->name('addresses.create');
+
+Route::resource('products', App\Http\Controllers\ProductController::class);
