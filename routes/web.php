@@ -44,3 +44,5 @@ Route::resource('addresses', App\Http\Controllers\AddressController::class)->exc
 Route::get('addresses/{customer}/create', [App\Http\Controllers\AddressController::class, 'create'])->name('addresses.create');
 
 Route::resource('products', App\Http\Controllers\ProductController::class);
+Route::resource('orders', App\Http\Controllers\OrderController::class);
+Route::resource('orderitems', App\Http\Controllers\OrderItemController::class)->only('store', 'destroy');

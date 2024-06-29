@@ -307,6 +307,11 @@ return [
             'route' => 'products.index',
             'icon' => 'fas fa-fw fa-user',
         ],
+        [
+            'text' => 'Vendas',
+            'route' => 'orders.index',
+            'icon' => 'fas fa-fw fa-user',
+        ],
         /*[
             'type' => 'navbar-search',
             'text' => 'search',
