@@ -13,6 +13,6 @@ class OrderPaymentSeeder extends Seeder
      */
     public function run(): void
     {
-        OrderPayment::factory(1000)->create();
+        OrderPayment::factory(10)->create();
     }
 }

@@ -12,7 +12,8 @@ class OrderStatusController extends Controller
      */
     public function index()
     {
-        //
+        $orderStatuses = OrderStatus::all();
+        return view('orders.statuses.index', compact('orderStatuses'));
     }
 
     /**
@@ -20,7 +21,7 @@ class OrderStatusController extends Controller
      */
     public function create()
     {
-        //
+        return view('orders.statuses.create');
     }
 
     /**
@@ -28,7 +29,8 @@ class OrderStatusController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        OrderStatus::create($request->all());
+        return redirect()->route('orderstatuses.index');
     }
 
     /**
@@ -42,24 +44,29 @@ class OrderStatusController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(OrderStatus $orderStatus)
+    public function edit($orderStatusId)
     {
-        //
+        $orderStatus = OrderStatus::findOrFail($orderStatusId);
+        return view('orders.statuses.edit', compact('orderStatus'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, OrderStatus $orderStatus)
+    public function update(Request $request, $orderStatusId)
     {
-        //
+        $orderStatus = OrderStatus::findOrFail($orderStatusId);
+        $orderStatus->update($request->all());
+        return redirect()->route('orderstatuses.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(OrderStatus $orderStatus)
+    public function destroy($orderStatusId)
     {
-        //
+        $orderStatus = OrderStatus::findOrFail($orderStatusId);
+        $orderStatus->delete();
+        return redirect()->route('orderstatuses.index');
     }
 }

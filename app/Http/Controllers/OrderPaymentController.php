@@ -12,7 +12,8 @@ class OrderPaymentController extends Controller
      */
     public function index()
     {
-        //
+        $orderPayments = OrderPayment::all();
+        return view('orders.payments.index', compact('orderPayments'));
     }
 
     /**
@@ -20,7 +21,7 @@ class OrderPaymentController extends Controller
      */
     public function create()
     {
-        //
+        return view('orders.payments.create');
     }
 
     /**
@@ -28,7 +29,8 @@ class OrderPaymentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        OrderPayment::create($request->all());
+        return redirect()->route('orderpayments.index');
     }
 
     /**
@@ -42,24 +44,29 @@ class OrderPaymentController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(OrderPayment $orderPayment)
+    public function edit($orderPaymentId)
     {
-        //
+        $orderPayment = OrderPayment::findOrFail($orderPaymentId);
+        return view('orders.payments.edit', compact('orderPayment'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, OrderPayment $orderPayment)
+    public function update(Request $request, $orderPaymentId)
     {
-        //
+        $orderPayment = OrderPayment::findOrFail($orderPaymentId);
+        $orderPayment->update($request->all());
+        return redirect()->route('orderpayments.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(OrderPayment $orderPayment)
+    public function destroy($orderPaymentId)
     {
-        //
+        $orderPayment = OrderPayment::findOrFail($orderPaymentId);
+        $orderPayment->delete();
+        return redirect()->route('orderpayments.index');
     }
 }

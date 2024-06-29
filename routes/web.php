@@ -46,3 +46,5 @@ Route::get('addresses/{customer}/create', [App\Http\Controllers\AddressControlle
 Route::resource('products', App\Http\Controllers\ProductController::class);
 Route::resource('orders', App\Http\Controllers\OrderController::class);
 Route::resource('orderitems', App\Http\Controllers\OrderItemController::class)->only('store', 'destroy');
+Route::resource('orderpayments', App\Http\Controllers\OrderPaymentController::class, ['parameters' => ['orderPayment' => 'orderpayment']]);
+Route::resource('orderstatuses', App\Http\Controllers\OrderStatusController::class);

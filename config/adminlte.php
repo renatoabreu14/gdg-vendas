@@ -309,8 +309,24 @@ return [
         ],
         [
             'text' => 'Vendas',
-            'route' => 'orders.index',
             'icon' => 'fas fa-fw fa-user',
+            'submenu' => [
+                [
+                    'text' => 'Listar   Vendas',
+                    'route' => 'orders.index',
+                    'icon' => 'fas fa-fw fa-user',
+                ],
+                [
+                    'text' => 'Pagamentos',
+                    'route' => 'orderpayments.index',
+                    'icon' => 'fas fa-fw fa-user',
+                ],
+                [
+                    'text' => 'Situações',
+                    'route' => 'orderstatuses.index',
+                    'icon' => 'fas fa-fw fa-user',
+                ],
+            ]
         ],
         /*[
             'type' => 'navbar-search',
