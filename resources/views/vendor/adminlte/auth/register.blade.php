@@ -53,6 +53,29 @@
             @enderror
         </div>
 
+
+
+        {{-- Commission field --}}
+        <div class="input-group mb-3">
+            <input type="number" name="commission" class="form-control @error('commission') is-invalid @enderror"
+                   value="{{ old('commission') }}" placeholder="Qual a comissão do vendedor" step="0.01">
+
+            <div class="input-group-append">
+                <div class="input-group-text">
+                    <span class="fas fa-percentage {{ config('adminlte.classes_auth_icon', '') }}"></span>
+                </div>
+            </div>
+
+            @error('commission')
+            <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+            @enderror
+        </div>
+
+
+
+
         {{-- Password field --}}
         <div class="input-group mb-3">
             <input type="password" name="password" class="form-control @error('password') is-invalid @enderror"

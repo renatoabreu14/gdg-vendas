@@ -38,6 +38,16 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
+        $validated = $request->validate([
+            'customer_id' => 'required',
+            'user_id' => 'required',
+            'order_status_id' => 'required',
+            'order_payment_id' => 'required',
+            'order_date' => 'required|date|date_format:Y-m-d',
+        ],[
+            'order_date.required' => 'o campo data é obrigatório',
+        ]);
+
         $order = Order::create($request->all());
         return redirect()->route('orders.show', compact('order'));
     }
@@ -77,6 +87,11 @@ class OrderController extends Controller
      */
     public function destroy(Order $order)
     {
+        foreach ($order->items as $item) {
+            $product = Product::findOrFail($item->pivot->product_id);
+            $product->stock += $item->pivot->quantity;
+            $product->save();
+        }
         $order->delete();
         return redirect()->route('orders.index');
     }

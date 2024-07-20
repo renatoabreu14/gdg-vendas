@@ -30,8 +30,25 @@ class OrderItemController extends Controller
      */
     public function store(Request $request)
     {
+
+        $validated = $request->validate([
+            'order_id' => 'required',
+            'product_id' => 'required',
+            'quantity' => 'required|numeric|min:1',
+        ],[
+            'quantity.required' => 'o campo quantidade é obrigatório',
+            'quantity.numeric' => 'o campo quantidade deve ser um número',
+            'quantity.min' => 'o campo quantidade deve ser maior que 0',
+        ]);
+
+        $quantity = $request->quantity;
         $order = Order::findOrFail($request->input('order_id'));
         $product = Product::findOrFail($request->input('product_id'));
+        if($product->stock < $quantity){
+            return redirect()->route('orders.show', $order)->withErrors( 'Quantidade indisponível em estoque');
+        }
+        $product->stock -= $quantity;
+        $product->update();
         $order->items()->attach($product->id, ['quantity' => $request->input('quantity'), 'price_sell' => $product->price_sell, 'price_buy' => $product->price_buy]);
         return redirect()->route('orders.show', $order);
     }
@@ -67,6 +84,11 @@ class OrderItemController extends Controller
     {
         $orderItem = OrderItem::findOrFail($orderItemId);
         $order = Order::findOrFail($orderItem->order_id);
+
+        $product = Product::findOrFail($orderItem->product_id);
+        $product->stock += $orderItem->quantity;
+        $product->save();
+
         $order->items()->detach($orderItem->product_id);
         return redirect()->route('orders.show', $order);
     }
